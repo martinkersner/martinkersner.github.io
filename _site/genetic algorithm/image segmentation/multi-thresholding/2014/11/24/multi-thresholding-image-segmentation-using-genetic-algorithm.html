@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Martin Keršner's blog - Machine Learning and Computer Vision</title>
+    <meta name="description" content="Machine Learning, Computer Vision" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <!--<a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>-->
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Multi-Thresholding Image Segmentation Using Genetic Algorithm</h1>
+            <section class="post-meta">                
+                <time class="post-date" datetime="2014-11-24">24 Nov 2014</time>
+                 
+                    on Genetic algorithm, Image segmentation, and Multi-thresholding 
+                
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://martinkersner.github.io">
+                
+                    <span class="blog-title">Martin Keršner's blog</span>
+                 
+            </a>
+        </header> -->
+        
+        <!-- <span class="post-meta">
+            <time datetime="2014-11-24">24 Nov 2014</time>
+             
+                on Genetic algorithm, Image segmentation, and Multi-thresholding 
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Multi-Thresholding Image Segmentation Using Genetic Algorithm</h1> -->
+
+        <section class="post-content">
+            <p>Paper (<a href="http://www.worldcomp-proceedings.com/proc/p2011/IPC8346.pdf">Multi-Thresholding Image Segmentation Using Genetic Algorithm</a>) proposes a method of image segmentation with multiple thresholds, which are determined by genetic algorithm. Multi-thresholding allows to segment more objects contained in image, however it could be extremely time consuming to find out these thresholds.</p>
+
+<h3>Basic terminology of genetic algorithms</h3>
+
+<p>Typically, population size represent the number of solutions per iteration.
+Chromosome is in other words solution.
+Genes (most often represented as bits) form a chromosome.</p>
+
+<h3>Genetic algorithm has four stages</h3>
+
+<ol>
+<li>Initialization,</li>
+<li>Evaluation of fitness,</li>
+<li>Reproduction,
+
+<ul>
+<li>Selection (<a href="https://en.wikipedia.org/wiki/Fitness_proportionate_selection">roulette wheel</a>),</li>
+<li>Crossover,</li>
+<li>Mutation,</li>
+<li>Accepting the solution.</li>
+</ul></li>
+<li>Termination.</li>
+</ol>
+
+<h3>Notes</h3>
+
+<p>Firstly they convert image to level of grays to reduce posterior computing time.</p>
+
+<p>They represent chromosomes as bit vectors of length <em>L * n</em>, where <em>L</em> denotes <em>log(number of gray levels)</em> and <em>n</em> is the number of desired thresholds.</p>
+
+<p>The fitness function is computed as ratio between inter-object variance and intra-object variance. Lower is better.</p>
+
+<p>At the final step of reproduction they compare created descendants with their parents and accept to new population only these which perform better.</p>
+
+<p>Genetic algorithm is terminated after particular number of iterations.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">Martin Keršner's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Martin Keršner </h4>
+                    <!-- Author Bio -->
+                    <p> 
+                        Machine learning engineer in Company 100, Seoul, South Korea.
+                    </p>
+                </section>                
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Multi-Thresholding Image Segmentation Using Genetic Algorithm&amp;url=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/11/24/multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/11/24/multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/11/24/multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+            
+            <!-- Disqus comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">Martin Keršner's blog</a> &copy; 
+               &bull; All rights reserved.
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-69668159-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>

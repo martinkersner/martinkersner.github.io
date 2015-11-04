@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Martin Keršner's blog - Machine Learning and Computer Vision</title>
+    <meta name="description" content="Machine Learning, Computer Vision" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <!--<a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>-->
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Implementation of Multi-Thresholding Image Segmentation Using Genetic Algorithm</h1>
+            <section class="post-meta">                
+                <time class="post-date" datetime="2014-12-08">08 Dec 2014</time>
+                 
+                    on Genetic algorithm, Image segmentation, and Multi-thresholding 
+                
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://martinkersner.github.io">
+                
+                    <span class="blog-title">Martin Keršner's blog</span>
+                 
+            </a>
+        </header> -->
+        
+        <!-- <span class="post-meta">
+            <time datetime="2014-12-08">08 Dec 2014</time>
+             
+                on Genetic algorithm, Image segmentation, and Multi-thresholding 
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Implementation of Multi-Thresholding Image Segmentation Using Genetic Algorithm</h1> -->
+
+        <section class="post-content">
+            <p>Project is inspired by <a href="http://www.worldcomp-proceedings.com/proc/p2011/IPC8346.pdf">paper</a>. Image segmentation can be pursued by many different ways. One of them is called multi-thresholding. Since we want to segment image to more than two segments (more than one threshold) we need to determine at least two thresholds. If we want to segment gray level image with 256 levels to three segments we are likely supposed to examine 256 * 255 = 65280 different threshold combinations. This brute force approach would end up with optimal solution,
+however computing time would be definitely high. Genetic algorithm searches space containing all possible solutions and obtain the best solution among all examined in much less time than brute force algorithm.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5238425/5abd2aea-78ba-11e4-9459-c76782c3c8e6.png" style="float: left"> <img src="https://cloud.githubusercontent.com/assets/2312761/5239562/2737e36e-78e6-11e4-8f2c-e6515460e9c2.png"></p>
+
+<p>The result of segmentation by genetic algorithm with population size 20 and number of iterations 30.</p>
+
+<h3>Implementation</h3>
+
+<p>Genetic algorithm was implemented in GNU Octave. This language was selected due to its fast prototyping. The speed of algorithm is not the matter of interest.</p>
+
+<h4>Initialization</h4>
+
+<p>This part of code is found at <code>ga_segmentation.m</code>. There are few settings which can affect the result of algorithm.</p>
+
+<ul>
+<li><em>n_population</em>: size of population; contains different solutions</li>
+<li><em>n_iterations</em>: number of iterations; algorithm terminates after all iterations are done</li>
+<li><em>n_thresholds</em>: number of desired thresholds; <em>n_thresholds</em> = (number of segments - 1)</li>
+</ul>
+
+<p>The next three settings are related to each other. They are ratios of selection (<em>n_selection</em>), crossover (<em>n_crossover</em>) and mutation (<em>n_mutation</em>). The sum of all these parameters has to be equal to 1. This condition guarantees the size of population does not change between iterations.</p>
+
+<p>Single chromose is implemented as vector of binary numbers. The length of vector is <em>L</em> * <em>n</em>, where <em>L</em> denotes <em>log(number of gray levels)</em> and <em>n</em> is the number of desired thresholds. Population is represented as a matrix, where each row is single chromosome and number of rows corresponds to size of population. An initial population was randomly generated.</p>
+
+<p>In this part we also load an image for segmentation. Algorithm works only with grayscale images, so we always convert each image at the beginning before we start to work with it.</p>
+
+<h4>Evaluation of fitness</h4>
+
+<p>According to paper, which was mentioned above, evaluation of fitness should be performed with ratio between between inter-object variance and intra-object variance. We have decided for sligthly easier evaluation based on sum of intra-object variance. The solution with the lowest sum is the most accurate.</p>
+
+<p><code>fitness.m</code>, <code>fitness_one.m</code></p>
+
+<h4>Selection</h4>
+
+<p>Current solution selects to new generation only the best solutions. The number of forwarded solution depends on ratio <em>n_selection</em>.</p>
+
+<p><code>first_best.m</code></p>
+
+<h4>Crossover</h4>
+
+<p>Chromosomes, which are supposed to crossover, are chosen from two vectors containing radomly permutated indexes (numbers of row) of chromosomes. The number chromosomes, which crossover, depends on ratio <em>n_crossover</em>. One-point crossover is employed in current solution. The point of crossover is randomly generated with uniform distribution.</p>
+
+<p><code>crossover.m</code>, <code>crossover_one.m</code></p>
+
+<h4>Mutation</h4>
+
+<p>Indexes (number of rows) of chromosomes are randomly permutated and the very first of them are more likely to be chosen. The number of chromosomes, which happens to be chosen for mutation, depends on ratio <em>n_mutation</em>. Current solution allows to mutate only one gene of chromosome.</p>
+
+<p><code>mutation.m</code>, <code>mutate_one.m</code></p>
+
+<h3>Experiments</h3>
+
+<p>Two experiments were performed:
+The first one with picture composed from solid colors
+and the second one uses benchmark from website <a href="http://mosaic.utia.cas.cz">mosaic.utia.cas.cz</a>.
+During the experiment we observed that 20 as size of population and 50 as number of iterations are satisfying for most of cases.</p>
+
+<h4>Solid colors</h4>
+
+<p>Though segmentation of this picture looks promising, we were not able to successfully segment all parts. The best result can be shown at the end of this subsection. We also noticed that algorithm is prone to insignificant segments (edges of shapes) with small area.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5239175/a63f604c-78d7-11e4-99a8-91ca7becaa40.png"></p>
+
+<p>Source image contains 8 different colors.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5239187/b675129e-78d8-11e4-8a5d-faf4898c4997.png">
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239188/ba1d9b14-78d8-11e4-8fcc-556cc89a3db5.png">
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239189/bc544df6-78d8-11e4-9320-ef1d5003ffff.png"></p>
+
+<p>2 thresholds, 3 segments</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5239265/5de327b6-78dc-11e4-91af-753c98480033.png"></p>
+
+<p>10 thresholds, 11 segments</p>
+
+<h4>Benchmark</h4>
+
+<p>Benchmark consist of 20 different images with artificially created texture segments. The number of segments is between 3 and 12, which can be sometimes even challenging for human.</p>
+
+<p>Each triplet of images below represents source image, ground truth of segmentation and segmentation done by genetic algorithm. As we could expect the results have not reached high. Correct segmentation is 2.17 % overall.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5239296/5a7cfdd0-78dd-11e4-92a7-46d6ccd706e3.png"> 
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239297/5d1f5b50-78dd-11e4-9809-e6a5e00795ef.png">
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239299/6187ee32-78dd-11e4-9a17-fdd317b0209a.png"></p>
+
+<p>2 thresholds, 3 segments</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/2312761/5239300/68d21fd2-78dd-11e4-9f0c-c32e04bac803.png">
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239301/6c8d395e-78dd-11e4-90ea-b68ad5035ecc.png">
+<img src="https://cloud.githubusercontent.com/assets/2312761/5239305/70767f8a-78dd-11e4-9d89-138f1fc80731.png"></p>
+
+<p>11 thresholds, 12 segments</p>
+
+<h3>Conclusion</h3>
+
+<p>Genetic algorithm is able to find suboptiomal solution of multi-threshold segmentation. This solution is not suitable for all kinds of segmentation problems; e.g. binary segmentation: there are more reliable methods like Balanced histogram thresholding or Otsu&#39;s method. The low performance of texture segmentation was confirmed by benchmark.</p>
+
+<p>The shortcoming of implemented solution is propensity to segment small areas like edges. These areas are not essential in segmentation and therefore should not be taken into account.</p>
+
+<p>The algorithm could be refined by two-point crossover or roulette wheel for selecting chromosomes to the next population.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">Martin Keršner's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Martin Keršner </h4>
+                    <!-- Author Bio -->
+                    <p> 
+                        Machine learning engineer in Company 100, Seoul, South Korea.
+                    </p>
+                </section>                
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Implementation of Multi-Thresholding Image Segmentation Using Genetic Algorithm&amp;url=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/12/08/implementation-of-multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/12/08/implementation-of-multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://martinkersner.github.io/genetic%20algorithm/image%20segmentation/multi-thresholding/2014/12/08/implementation-of-multi-thresholding-image-segmentation-using-genetic-algorithm.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+            
+            <!-- Disqus comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">Martin Keršner's blog</a> &copy; 
+               &bull; All rights reserved.
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-69668159-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>
