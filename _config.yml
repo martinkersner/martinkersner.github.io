@@ -1,0 +1,18 @@
+name: Martin Keršner's blog
+description: Machine Learning and Computer Vision
+meta_description: "Machine Learning, Computer Vision"
+
+markdown: redcarpet
+highlighter: pygments
+logo: false
+paginate: 15
+baseurl: /
+domain_name: 'http://martinkersner.github.io'
+google_analytics: 'UA-69668159-1'
+
+# Details for the RSS feed generator
+url:            'http://martinkersner.github.io'
+author:         'Martin Keršner'
+
+gems :
+- jekyll-paginate
