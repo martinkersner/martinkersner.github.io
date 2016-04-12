@@ -21,7 +21,7 @@ post_class: post-template
             <section class="post-meta">                
                 <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
                 {% if page.categories.size > 0 %} 
-                    {{ page.categories | array_to_sentence_string | prepend: 'on ' }} 
+                    {{ page.categories | array_to_sentence_string }} 
                 {% endif %}
             </section>
         </header>
@@ -39,7 +39,7 @@ post_class: post-template
         <!-- <span class="post-meta">
             <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
             {% if page.categories.size > 0 %} 
-                {{ page.categories | array_to_sentence_string | prepend: 'on ' }} 
+                {{ page.categories | array_to_sentence_string } 
             {% endif %}
         </span> -->
 

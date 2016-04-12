@@ -50,7 +50,7 @@ about: 'about.html'
                 {{ post.date | date_to_string }}
             </time> 
             {% if post.categories.size > 0 %} 
-                {{ post.categories | array_to_sentence_string | prepend: 'on ' }} 
+                {{ post.categories | array_to_sentence_string }} 
             {% endif %}
         </footer>
     </article>
