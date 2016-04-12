@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Faster grep"
 date:   2016-04-11 10:10:00
-disqus_identifier: 20160111
+disqus_identifier: 20160411
 categories: ['Linux', 'GNU grep']
 ---
 
