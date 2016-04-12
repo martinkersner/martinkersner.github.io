@@ -2,7 +2,7 @@ name: Martin Keršner's blog
 description: Machine Learning and Computer Vision
 meta_description: "Machine Learning, Computer Vision"
 
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
