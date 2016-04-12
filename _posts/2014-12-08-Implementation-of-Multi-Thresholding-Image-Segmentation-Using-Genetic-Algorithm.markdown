@@ -7,10 +7,12 @@ disqus_identifier: 20141208
 categories: ['Genetic algorithm', 'Image segmentation', 'Multi-thresholding']
 ---
 
-Project is inspired by [paper][paper-pdf]. Image segmentation can be pursued by many different ways. One of them is called multi-thresholding. Since we want to segment image to more than two segments (more than one threshold) we need to determine at least two thresholds. If we want to segment gray level image with 256 levels to three segments we are likely supposed to examine 256 * 255 = 65280 different threshold combinations. This brute force approach would end up with optimal solution,
+Project is inspired by [Multi-Thresholding Image Segmentation Using Genetic Algorithm][paper-pdf] paper. Image segmentation can be pursued by many different ways. One of them is called multi-thresholding. Since we want to segment image to more than two segments (more than one threshold) we need to determine at least two thresholds. If we want to segment gray level image with 256 levels to three segments we are likely supposed to examine 256 * 255 = 65,280 different threshold combinations. This brute force approach would end up with optimal solution,
 however computing time would be definitely high. Genetic algorithm searches space containing all possible solutions and obtain the best solution among all examined in much less time than brute force algorithm.
 
-<img src="https://cloud.githubusercontent.com/assets/2312761/5238425/5abd2aea-78ba-11e4-9459-c76782c3c8e6.png" style="float: left"> <img src="https://cloud.githubusercontent.com/assets/2312761/5239562/2737e36e-78e6-11e4-8f2c-e6515460e9c2.png">
+<div style="text-align:center">
+<img src="http://i.imgur.com/eo13WyX.png?1" />
+</div>
 
 The result of segmentation by genetic algorithm with population size 20 and number of iterations 30.
 
@@ -20,7 +22,7 @@ Genetic algorithm was implemented in GNU Octave. This language was selected due 
 
 #### Initialization
 
-This part of code is found at `ga_segmentation.m`. There are few settings which can affect the result of algorithm.
+This part of code can be found at `ga_segmentation.m`. There are few settings which affect the result of algorithm.
 
 * *n_population*: size of population; contains different solutions
 * *n_iterations*: number of iterations; algorithm terminates after all iterations are done
