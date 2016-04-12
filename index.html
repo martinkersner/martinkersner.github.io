@@ -45,6 +45,7 @@ about: 'about.html'
             <time class="post-date" datetime="{{ post.date | date:"%Y-%m-%d" }}">
                 {{ post.date | date_to_string }}
             </time> 
+            <a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.disqus_identifier }}" class="post-comment">Comments loading...</a>
             {% if post.categories.size > 0 %} 
                 {{ post.categories | array_to_sentence_string }} 
             {% endif %}
