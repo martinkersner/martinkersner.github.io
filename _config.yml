@@ -3,7 +3,7 @@ description: Machine Learning and Computer Vision
 meta_description: "Machine Learning, Computer Vision"
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 logo: false
 paginate: 15
 baseurl: /
