@@ -2,7 +2,7 @@
 layout: post
 title:  "Faster grep"
 date:   2016-04-11 10:10:00
-categories: ['Linux', 'grep']
+categories: ['Linux', 'GNU grep']
 ---
 
 Grep is GNU tool that is used for matching lines with particular pattern.
@@ -43,7 +43,7 @@ We also have a file with patterns (file names of images) that we want to include
 In both files we assume that every line is unique and lines are sorted.
 Without uniqueness this particualar example wouldn't make sense.
 Sorting lines is one of the secrets allowing much faster pattern matching, therefore sorted lines are necessary.
-If we use GNU grep lines don't have to be sorted but sorting itself doesn't affect overall speed of pattern matching because we can sort files just ones.
+If we use GNU grep lines don't have to be sorted but sorting itself doesn't affect overall speed of pattern matching because we can sort files just once.
 Sorting (GNU sort) file  with 11,355 lines takes about 0.080 seconds and that is insignificant in comparison with the time spent for pattern matching. 
 
 <script src="https://gist.github.com/martinkersner/32e909a518d6983d37b524a4d3984dd4.js"></script>
