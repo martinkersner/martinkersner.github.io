@@ -1,7 +1,9 @@
 ---
 layout: post
+comments: true
 title:  "Faster grep"
 date:   2016-04-11 10:10:00
+disqus_identifier: 20160111
 categories: ['Linux', 'GNU grep']
 ---
 
@@ -23,6 +25,7 @@ Uderstanding of data and details of file we work with can speed up our pattern m
 Let's say that we have a file with paths to images but we want to obtain just some of them.
 
 *file.txt*
+
 ```
 /images_aug/2008_000002.jpg /labels_bbox/2008_000002.png
 /images_aug/2008_000003.jpg /labels_bbox/2008_000003.png
@@ -33,6 +36,7 @@ Let's say that we have a file with paths to images but we want to obtain just so
 We also have a file with patterns (file names of images) that we want to include in result.
 
 *patterns.txt*
+
 ```
 2007_000032.png
 2007_000039.png

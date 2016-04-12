@@ -1,7 +1,9 @@
 ---
 layout: post
+comments: true
 title:  "Implementation of Multi-Thresholding Image Segmentation Using Genetic Algorithm"
 date:   2014-12-08 10:10:00
+disqus_identifier: 20141208
 categories: ['Genetic algorithm', 'Image segmentation', 'Multi-thresholding']
 ---
 
