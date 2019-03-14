@@ -1,18 +1,27 @@
-name: Martin Keršner's blog
-description: Machine Learning and Computer Vision
-meta_description: "Machine Learning, Computer Vision"
+# Site settings
+title: Martin Kersner
+email: contact@martinkersner.com
+url: //martinkersner.com
+description: "Martin Kersner - Mobile Deep Learning"
 
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Color settings (hex-codes without the leading hash-tag)
+color:
+  primary-dark: '#fff'
+  links: '#219ab3'
+
+# Footer settings
+footer: 2019
+
+# Team names, titles and social links
+team_list:
+  - martin
+
+# Build settings
 markdown: kramdown
+permalink: pretty
+
 highlighter: rouge
-logo: false
-paginate: 15
-baseurl: /
-domain_name: 'http://martinkersner.github.io'
-google_analytics: 'UA-69668159-1'
-
-# Details for the RSS feed generator
-url:            'http://martinkersner.github.io'
-author:         'Martin Keršner'
-
-gems :
-- jekyll-paginate
