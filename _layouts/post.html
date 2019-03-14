@@ -2,6 +2,9 @@
 <html>
   <head>
     {% include head.html %}
+    {% if page.summary %}
+    <meta name="description" content="{{ page.summary | escape }}">
+    {% endif %}
     <!-- LaTex -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
