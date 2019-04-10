@@ -1,0 +1,26 @@
+---
+layout: research
+---
+
+<section id="main-content" class="container content-section">
+<div class="row">
+<div class="col-lg-12">
+{% assign papers = site.data.papers %}
+{% for paper in papers %}
+  <div>
+    {% assign page_date = paper.date | date: '%Y'  %}
+    <h3 class="post_title"><a href="{{ paper.arxiv }}" target="_blank">{{ paper.title }}</a></h3>
+    <span class="post_date">{{ page_date }}</span>
+    <span class="post_name">{{ paper.authors }}</span>
+    <p>
+    {{ paper.abstract }}
+    <br/><a href="{{ paper.arxiv }}" target="_blank">Arxiv</a>&nbsp;
+    <a href="{{ paper.github }}" target="_blank">Code</a>
+    </p>
+    <p>
+    </p>
+  </div>
+{% endfor %}
+</div>
+</div>
+</section>
