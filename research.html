@@ -15,7 +15,9 @@ layout: research
     <p>
     {{ paper.abstract }}
     <br/><a href="{{ paper.arxiv }}" target="_blank">Arxiv</a>&nbsp;
+    {% if paper.github.size > 0 %}
     <a href="{{ paper.github }}" target="_blank">Code</a>
+    {% endif %}
     </p>
     <p>
     </p>
