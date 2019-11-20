@@ -10,7 +10,11 @@ layout: research
   <div>
     {% assign page_date = paper.date | date: '%Y'  %}
     <h3 class="post_title"><a href="{{ paper.arxiv }}" target="_blank">{{ paper.title }}</a></h3>
+    {% if paper.conference.size > 0 %}
+    <span class="post_name">{{ paper.conference }}</span>
+    {% else %}
     <span class="post_date">{{ page_date }}</span>
+    {% endif %}
     <span class="post_name">{{ paper.authors }}</span>
     <p>
     {{ paper.abstract }}
