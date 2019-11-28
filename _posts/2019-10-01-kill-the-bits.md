@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Kill the bits and gain the speed?"
-date:   2019-10-01 00:0:00 +0000
-disqus_identifier: 2019-10-01
+date:   2019-11-28 00:0:00 +0000
+disqus_identifier: 2019-11-28
 author: martin
 comments: true
 summary: Recently, Facebook AI Research in collaboration with University of Rennes released paper “And the Bit Goes Down&#58; Revisiting the Quantization of Neural Networks” which was submitted to ICLR 2020. The authors proposed a method of weight quantization for ResNet-like architectures using Product Quantization. Unlike many other papers, the error caused by codewords was not minimized directly. The training method aims to minimize the reconstruction error of fully-connected and convolutional layer activations using weighted k-means. Quantization was applied to all 3x3 and 1x1 kernel sizes except for the first convolutional layer. The paper emphasizes the importance of optimizing on in-domain input data in both quantizing and fine-tuning stages. Using their technique, weights in ResNet50 can be compressed with a 20x factor while maintaining competitive accuracy (76.1&nbsp;%). The potential impact of byte-aligned codebooks on efficient inference on CPU was briefly mentioned, but no actual method was presented. We propose and explore one possible way of exploiting frequent redundant codewords across input channels in order to accelerate inference on mobile devices.
