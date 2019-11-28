@@ -40,7 +40,7 @@ The codewords are derived from data, and the more frequent components can be qua
 The quantization process itself is usually done using one of the clustering techniques, such as <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">weighted $k$-means</a> in the case of "And the Bit Goes Down"<a href="#kill-the-bits-ref">[1]</a>.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/codebook2.png" | prepend: site.url }}" width="90%">
+<img src="{{ "/img/blog/kill-the-bits/codebook.png" | prepend: site.url }}" width="90%">
 </center>
 
 <a class="anchor" id="codebook-generation"></a>
@@ -84,7 +84,7 @@ The weight $W_{fc} \in R^{C_{in} \times C_{out}}$ of the fully-connected layer i
 Generated subvectors are utilized for quantization and the generation of codewords within the codebook.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/fc-split2.png" | prepend: site.url }}" width="35%" >
+<img src="{{ "/img/blog/kill-the-bits/fc-split.png" | prepend: site.url }}" width="35%" >
 </center>
 
 *Figure 2: Visualization of weight split into subvectors in a fully-connected layer.*
