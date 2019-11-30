@@ -156,7 +156,7 @@ In the next section, we describe how we implemented and evaluated the proposed a
 <a class="anchor" id="implementation-and-analysis"></a>
 ## Analysis & Implementation
 The authors released an <a href="https://github.com/facebookresearch/kill-the-bits" target="_blank">implementation of paper</a> together with several <a href="https://github.com/facebookresearch/kill-the-bits/tree/master/src/models/compressed" target="_blank">pre-trained models</a>.
-For our analysis, we use ResNet 18 network as an example and all measurements are taken on <a href="https://www.gsmarena.com/oneplus_6t-9350.php" target="_blank">One Plus 6t</a> running modified <a href="https://github.com/bisonai/ncnn" target="_blank">ncnn</a> inference engine.
+For our analysis, we use ResNet 18 network as an example and all experiments are measured on <a href="https://www.gsmarena.com/oneplus_6t-9350.php" target="_blank">One Plus 6t</a> and <a href="https://www.gsmarena.com/samsung_galaxy_note_3-5665.php" target="_blank">Samsung Galaxy Note 3</a> running modified <a href="https://github.com/bisonai/ncnn" target="_blank">ncnn</a> inference engine.
 
 ### Theoretical Speedup
 The computational cost of standard convolution is defined as
@@ -210,7 +210,7 @@ While this implementation promises an accelerated inference time, it should be n
 
 <a class="anchor" id="benchmarking-optimized-convolution"></a>
 ### Benchmarking Optimized Convolution
-In the following figures, we compare the inference time of original 3x3 convolution (denoted as *w/o reduction* and displayed in red color) with 3x3 convolution enhanced by preprocessing of input activation (denoted as *w/ reduction* and displayed in blue color).
+In the following figures, we compare the inference time of original 3x3 convolution (denoted as *w/o reduction*) with 3x3 convolution enhanced by preprocessing of input activations (denoted as *w/ reduction*).
 
 <center>
 <img src="{{ "/img/blog/kill-the-bits/speedup_7x7.png" | prepend: site.url }}" width="70%">
@@ -254,12 +254,12 @@ Network weights are quantized using weighted $k$-means with an objective functio
 The proposed method achieves high compression rates on Resnet-like architectures, however, there was no suggestion in the paper how we could accelerate an inference time with such a quantization scheme.
 
 We proposed a method that modifies input activations and convolutional weights to reduce the number of multiplications in a convolutional layer.
-By benchmarking on a One Plus 6t mobile device, we confirmed a speedup of convolution using our method.
+By benchmarking on a One Plus 6t and a Samsung Galaxy Note 3, we confirmed a speedup of convolution using our method.
 However, in order to achieve any meaningful speed gains the number of channels has to be reduced by at least a factor of 4x.
 
 <a class="anchor" id="notes"></a>
 ## Notes
-All experiments were launched using a <a href="TODO" target="_blank">modified ncnn benchmark</a> on a One Plus 6t with Snapdragon 845.
+All experiments were launched using a <a href="TODO" target="_blank">modified ncnn benchmark</a> on a One Plus 6t with Snapdragon 845 and a Samsung Galaxy Note 3 with Snapdragon 800.
 Every measurement was obtained by averaging 200 continuous runs and removing outliers from the first and last quartile of inference duration distribution.
 Lastly, we always used only a single big core, since it reflects the best an allowed computational power in real-world scenarios.
 
