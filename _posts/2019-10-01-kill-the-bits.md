@@ -183,17 +183,17 @@ In the figure below, you can see that the reduction of input channels is more pr
 
 ### Layer-wise Analysis
 To put a theoretical speedup into perspective, we measured an inference time of floating-point ResNet 18 network.
-The execution of all layers took about 187&nbsp;ms.
-From the figure below, we can see that most of the time (89.2&nbsp;%) is spent in 3x3 convolutions and the second most time-consuming layer is 7x7 convolution.
+The execution of all layers took about 187&nbsp;ms and 299&nbsp;ms on One Plus 6t and Samsung Galaxy Note 3, respectively.
+From the figure below, we can see that most of the time (89.2&nbsp;% for One Plus 6t) is spent in 3x3 convolutions and the second most time-consuming layer is 7x7 convolution.
 Our focus is only on 3x3 convolution because 7x7 convolution is part of the first layer which was not quantized.
 
 <center>
 <img src="{{ "/img/blog/kill-the-bits/breakdown-resnet18.png" | prepend: site.url }}" width="70%">
 </center>
 
-*Figure 5: Layer type-wise inference time breakdown of floating-point Resnet 18 network executed on Snapdragon 845.*
+*Figure 5: Layer type-wise inference time breakdown of floating-point Resnet 18 network executed on One Plus 6t.*
 
-Many 3x3 convolutional layers cost around 11&nbsp;ms.
+Many 3x3 convolutional layers cost around 11&nbsp;ms (One Plus 6t).
 The most frequent input activation shapes are 56x56, 28x28, 14x14 and 7x7 with 64, 128, 256 and 512 input channels, respectively.
 Later, we will <a href="#benchmarking-optimized-convolution">benchmark</a> these convolutions to find out the actual computational speedup.
 
@@ -234,7 +234,7 @@ It is caused by access to every channel of input activation and channel-wise sum
 Moreover, the implementation of the convolutional layer exploits <a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0489i/CIHBGIGD.html" target="_blank">`vmla` SIMD instruction</a> that can multiply and accumulate four single-precision floating-point values in parallel using only one instruction.
 
 ```c++
-float32x4_t vmlaq_f32 (float32x4_t a, float32x4_t b, float32x4_t c)
+float32x4_t vmlaq_f32(float32x4_t a, float32x4_t b, float32x4_t c);
 ```
 
 *Code 1: `vmlaq_f32` ARM Neon instruction can perform 4 multiplications of 32-bit floating-point and 4 additions of 32-bit floating-point in parallel using one instruction.*
