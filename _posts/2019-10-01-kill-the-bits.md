@@ -18,9 +18,6 @@ Using their technique, weights in ResNet50 can be compressed with a 20x factor w
 The potential impact of byte-aligned codebooks on efficient inference on CPU was briefly mentioned, but no actual method was presented.
 We propose and explore one <a href="#inference-acceleration">possible way of exploiting frequent redundant codewords</a> across input channels in order to accelerate inference on mobile devices.
 
-<!-- TODO BISONAI -->
-<!-- TODO why mobile machine learning? -->
-
 The following post is divided into two parts: <a href="#method-overview">Method Overview</a>, and <a href="#inference-acceleration">Inference Acceleration</a>.
 
 <a class="anchor" id="method-overview"></a>
@@ -156,7 +153,7 @@ In the next section, we describe how we implemented and evaluated the proposed a
 <a class="anchor" id="implementation-and-analysis"></a>
 ## Analysis & Implementation
 The authors released an <a href="https://github.com/facebookresearch/kill-the-bits" target="_blank">implementation of paper</a> together with several <a href="https://github.com/facebookresearch/kill-the-bits/tree/master/src/models/compressed" target="_blank">pre-trained models</a>.
-For our analysis, we use ResNet 18 network as an example and all experiments are measured on <a href="https://www.gsmarena.com/oneplus_6t-9350.php" target="_blank">One Plus 6t</a> and <a href="https://www.gsmarena.com/samsung_galaxy_note_3-5665.php" target="_blank">Samsung Galaxy Note 3</a> running modified <a href="https://github.com/bisonai/ncnn" target="_blank">ncnn</a> inference engine.
+For our analysis, we use ResNet 18 network as an example and all experiments are measured on <a href="https://www.gsmarena.com/oneplus_6t-9350.php" target="_blank">One Plus 6t</a> and <a href="https://www.gsmarena.com/samsung_galaxy_note_3-5665.php" target="_blank">Samsung Galaxy Note 3</a> running modified <a href="https://github.com/Bisonai/ncnn/tree/feature/kill-the-bits" target="_blank">ncnn</a> inference engine.
 
 ### Theoretical Speedup
 The computational cost of standard convolution is defined as
@@ -201,8 +198,8 @@ The most frequent input activation shapes are 56x56, 28x28, 14x14 and 7x7 with 6
 Later, we will <a href="#benchmarking-optimized-convolution">benchmark</a> these convolutions to find out the actual computational speedup.
 
 ### Implementation
-To be able to verify the theoretical speedup, we <a href="https://github.com/bisonai/ncnn" target="_blank">modified ncnn</a> inference engine and integrated our proposed inference acceleration method.
-We added a <a href="TODO" target="_blank">channel-wise summation of input activations</a> with a randomly generated codeword assignments limited by the number of unique weight codewords per input channel.
+To be able to verify the theoretical speedup, we <a href="https://github.com/Bisonai/ncnn/tree/feature/kill-the-bits" target="_blank">modified ncnn</a> inference engine and integrated our proposed inference acceleration method.
+We added a <a href="https://github.com/Bisonai/ncnn/blob/2b17ac9364092c052d3ac52a699149fcc2994fd9/src/layer.cpp#L108-L155" target="_blank">channel-wise summation of input activations</a> with a randomly generated codeword assignments limited by the number of unique weight codewords per input channel.
 The summation was implemented using <a href="https://developer.arm.com/architectures/instruction-sets/simd-isas/neon/intrinsics" target="_target">NEON intrinsics</a> to exploit parallel processing capabilities of the ARM processor and the memory used to store the summed up input activations were allocated in advance, during the network initialization.
 Convolutional weights need to be altered in a way that acknowledges changes within input activations, specifically by shifting and removing weight codewords.
 In our implementation, however, we allocate only weights of correct shape, without correct weight initialization.
@@ -259,7 +256,7 @@ However, in order to achieve any meaningful speed gains the number of channels h
 
 <a class="anchor" id="notes"></a>
 ## Notes
-All experiments were launched using a <a href="TODO" target="_blank">modified ncnn benchmark</a> on a One Plus 6t with Snapdragon 845 and a Samsung Galaxy Note 3 with Snapdragon 800.
+All experiments were launched using a <a href="https://github.com/Bisonai/ncnn/tree/feature/kill-the-bits" target="_blank">modified ncnn benchmark</a> on a One Plus 6t with Snapdragon 845 and a Samsung Galaxy Note 3 with Snapdragon 800.
 Every measurement was obtained by averaging 200 continuous runs and removing outliers from the first and last quartile of inference duration distribution.
 Lastly, we always used only a single big core, since it reflects the best an allowed computational power in real-world scenarios.
 
