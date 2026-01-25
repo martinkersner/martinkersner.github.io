@@ -1,7 +1,7 @@
 # Site settings
 title: Martin Kersner
 email: contact@martinkersner.com
-url: //martinkersner.com
+url: https://martinkersner.com
 
 plugins:
   - jekyll-sitemap

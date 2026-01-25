@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Martin Kersner</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Martin Kersner</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kill the bits and gain the speed?</title>
+      <link>http://localhost:1313/2019/11/28/kill-the-bits-and-gain-the-speed/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/2019/11/28/kill-the-bits-and-gain-the-speed/</guid>
+      <description>Recently, Facebook AI Research in collaboration with University of Rennes released paper “And the Bit Goes Down: Revisiting the Quantization of Neural Networks” which was accepted to ICLR 2020. The authors proposed a method of weight quantization for ResNet-like architectures using Product Quantization. Unlike many other papers, the error caused by codewords was not minimized directly. The training method aims to minimize the reconstruction error of fully-connected and convolutional layer activations using weighted k-means. Quantization was applied to all 3x3 and 1x1 kernel sizes except for the first convolutional layer. The paper emphasizes the importance of optimizing on in-domain input data in both quantizing and fine-tuning stages. Using their technique, weights in ResNet 50 can be compressed with a 20x factor while maintaining competitive accuracy (76.1 %). The potential impact of byte-aligned codebooks on efficient inference on CPU was briefly mentioned, but no actual method was presented. We propose and explore one possible way of exploiting frequent redundant codewords across input channels in order to accelerate inference on mobile devices.</description>
+    </item>
+    <item>
+      <title>Convolutional network without multiplication operation</title>
+      <link>http://localhost:1313/2019/03/14/convolutional-network-without-multiplication-operation/</link>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/2019/03/14/convolutional-network-without-multiplication-operation/</guid>
+      <description>In September 2018, Google Research team released paper with the title “No Multiplication? No floating point? No problem? Training networks for efficient inference” which we will refer to as NMNF. The main building blocks of convolutional neural networks are convolutional layers and the great majority of inference time is spent in them. NMNF paper targets devices like hearing aids, earbuds or wearables. Such devices are highly resource constrained, in terms of memory, power, and computation, and therefore benefit from a specialized implementation of convolutional layer introduced in the paper. Inference-time floating point operations are not only energy-hungry compared to integer operations but also computationally demanding. NMNF approach avoids floating point operations entirely and consequently, we can enjoy reduced model size as well.</description>
+    </item>
+  </channel>
+</rss>

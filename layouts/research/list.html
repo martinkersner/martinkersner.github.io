@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <section id="main-content" class="container content-section">
+    <div class="row">
+      <div class="col-lg-12">
+        {{ range .Site.Data.papers }}
+          <div>
+            <h3 class="post_title"><a href="{{ .arxiv }}" target="_blank" rel="noopener">{{ .title }}</a></h3>
+            {{ if .conference }}
+              <span class="post_name">{{ .conference }}</span>
+            {{ else }}
+              <span class="post_date">{{ (time .date).Format "2006" }}</span>
+            {{ end }}
+            <span class="post_name">{{ .authors | safeHTML }}</span>
+            <p>
+              {{ .abstract }}
+              <br><a href="{{ .arxiv }}" target="_blank" rel="noopener">Arxiv</a>&nbsp;
+              {{ if .github }}<a href="{{ .github }}" target="_blank" rel="noopener">Code</a>{{ end }}
+              {{ if .project_page }}<a href="{{ .project_page }}" target="_blank" rel="noopener">Project page</a>{{ end }}
+            </p>
+            <p>
+            </p>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
