@@ -12,7 +12,7 @@
             {{ end }}
             <span class="post_name">{{ .authors | safeHTML }}</span>
             <p>
-              {{ .abstract }}
+              {{ .abstract | markdownify }}
               {{ if .arxiv }}
                 <br><a href="{{ .arxiv }}" target="_blank" rel="noopener">
                   {{- if hasPrefix .arxiv "/" -}}PDF{{- else -}}Arxiv{{- end -}}
