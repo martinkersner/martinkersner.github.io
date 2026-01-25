@@ -11,12 +11,14 @@
               <span class="post_date">{{ (time .date).Format "2006" }}</span>
             {{ end }}
             <span class="post_name">{{ .authors | safeHTML }}</span>
-            <p>
-              {{ .abstract | markdownify }}
+            <p class="paper-abstract">
+              {{ .abstract | safeHTML }}
+            </p>
+            <p class="paper-links">
               {{ if .arxiv }}
-                <br><a href="{{ .arxiv }}" target="_blank" rel="noopener">
+                <a href="{{ .arxiv }}" target="_blank" rel="noopener">
                   {{- if hasPrefix .arxiv "/" -}}PDF{{- else -}}Arxiv{{- end -}}
-                </a>&nbsp;
+                </a>
               {{ end }}
               {{ if .github }}<a href="{{ .github }}" target="_blank" rel="noopener">Code</a>{{ end }}
               {{ if .project_page }}<a href="{{ .project_page }}" target="_blank" rel="noopener">Project page</a>{{ end }}

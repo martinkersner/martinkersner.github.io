@@ -10,3 +10,7 @@
 #post table td:first-child {
     width: 140px;
 }
+
+section#main-content .paper-links {
+    margin-top: 0.6em;
+}
