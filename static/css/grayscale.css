@@ -10,7 +10,7 @@ body {
     font-family: Roboto,sans-serif;
     /*font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
     color: #000;
-    background-color: {{ site.color.primary-dark }};
+    background-color: #fff;
 }
 
 html {
@@ -43,7 +43,7 @@ p {
 }
 
 a {
-    color: {{ site.color.links }};
+    color: #219ab3;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -64,7 +64,7 @@ a:focus {
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: {{ site.color.primary-dark }};
+    background-color: #fff;
 }
 
 .navbar-custom .navbar-brand {
@@ -120,7 +120,7 @@ a:focus {
 
     .top-nav-collapse {
         padding: 0;
-        background-color: {{ site.color.primary-dark }};
+        background-color: #fff;
     }
 
     .navbar-custom.top-nav-collapse {
@@ -276,17 +276,17 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid {{ site.color.links }};
-    color: {{ site.color.links }};
+    border: 1px solid #219ab3;
+    color: #219ab3;
     background-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid {{ site.color.links }};
+    border: 1px solid #219ab3;
     outline: 0;
-    color: {{ site.color.primary-dark }};
-    background-color: {{ site.color.links }};
+    color: #fff;
+    background-color: #219ab3;
 }
 
 ul.banner-social-buttons {
@@ -355,7 +355,7 @@ span#heart {
 .text-muted {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 1em;
-    #{{ site.data.template.color.muted }};
+    color: #777;
 }
 
 ul.list-inline {

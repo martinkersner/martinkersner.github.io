@@ -1,0 +1,17 @@
+baseURL = "https://martinkersner.com/"
+title = "Martin Kersner"
+languageCode = "en-us"
+enableRobotsTXT = true
+
+[permalinks]
+  posts = "/:year/:month/:day/:slug/"
+
+[params]
+  description = "Personal site and research notes."
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "pastie"
+  [markup.goldmark.renderer]
+    unsafe = true

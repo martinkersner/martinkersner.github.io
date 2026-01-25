@@ -1,11 +1,11 @@
 ---
-layout: post
 title:  "Kill the bits and gain the speed?"
-date:   2019-11-28 00:0:00 +0000
+date: 2019-11-28T00:00:00Z
+slug: "kill-the-bits"
 disqus_identifier: 2019-11-28
 author: martin
-comments: true
 summary: "Recently, Facebook AI Research in collaboration with University of Rennes released paper “And the Bit Goes Down: Revisiting the Quantization of Neural Networks” which was accepted to ICLR 2020. The authors proposed a method of weight quantization for ResNet-like architectures using Product Quantization. Unlike many other papers, the error caused by codewords was not minimized directly. The training method aims to minimize the reconstruction error of fully-connected and convolutional layer activations using weighted k-means. Quantization was applied to all 3x3 and 1x1 kernel sizes except for the first convolutional layer. The paper emphasizes the importance of optimizing on in-domain input data in both quantizing and fine-tuning stages. Using their technique, weights in ResNet 50 can be compressed with a 20x factor while maintaining competitive accuracy (76.1&nbsp;%). The potential impact of byte-aligned codebooks on efficient inference on CPU was briefly mentioned, but no actual method was presented. We propose and explore one possible way of exploiting frequent redundant codewords across input channels in order to accelerate inference on mobile devices."
+comments: true
 ---
 
 Recently, Facebook AI Research in collaboration with University of Rennes released paper **“And the Bit Goes Down: Revisiting the Quantization of Neural Networks”** <a href="#kill-the-bits-ref">[1]</a> which was accepted to <a href="https://openreview.net/forum?id=rJehVyrKwH" target="_blank">ICLR 2020</a>.
@@ -37,7 +37,7 @@ The codewords are derived from data, and the more frequent components can be qua
 The quantization process itself is usually done using one of the clustering techniques, such as <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">weighted $k$-means</a> in the case of "And the Bit Goes Down"<a href="#kill-the-bits-ref">[1]</a>.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/codebook.png" | prepend: site.url }}" width="90%">
+<img src="/img/blog/kill-the-bits/codebook.png" width="90%">
 </center>
 
 <a class="anchor" id="codebook-generation"></a>
@@ -81,7 +81,7 @@ The weight $W_{fc} \in R^{C_{in} \times C_{out}}$ of the fully-connected layer i
 Generated subvectors are utilized for quantization and the generation of codewords within the codebook.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/fc-split.png" | prepend: site.url }}" width="35%" >
+<img src="/img/blog/kill-the-bits/fc-split.png" width="35%" >
 </center>
 
 *Figure 2: Visualization of weight split into subvectors in a fully-connected layer.*
@@ -116,7 +116,7 @@ Weights in PQ network have the same shape as those in an original non-quantized 
 In the figure below, we conceptualize repeated codewords within the same group of input channels using colors (every column has at least two identical codewords).
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/fc-split-repeat.png" | prepend: site.url }}" width="30%" >
+<img src="/img/blog/kill-the-bits/fc-split-repeat.png" width="30%" >
 </center>
 
 *Figure 3: Visualization of weight split into subvectors in a fully-connected layer with repeated codewords within the same group of input channels.*
@@ -176,7 +176,7 @@ With this, we obtain a **minimal theoretical speedup reaching almost 20&nbsp;% o
 In the figure below, you can see that the reduction of input channels is more pronounced in the latter parts of the network, where the original number of input channels stretches up to 512.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/channel-reduction.png" | prepend: site.url }}" width="80%">
+<img src="/img/blog/kill-the-bits/channel-reduction.png" width="80%">
 </center>
 
 *Figure 4: Number of input channels before and after preprocessing of input activations for every convolutional layer.*
@@ -188,7 +188,7 @@ From the figure below, we can see that most of the time (89.2&nbsp;% for One Plu
 Our focus is only on 3x3 convolution because 7x7 convolution is part of the first layer which was not quantized.
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/breakdown-resnet18.png" | prepend: site.url }}" width="70%">
+<img src="/img/blog/kill-the-bits/breakdown-resnet18.png" width="70%">
 </center>
 
 *Figure 5: Layer type-wise inference time breakdown of floating-point Resnet 18 network executed on One Plus 6t.*
@@ -210,19 +210,19 @@ While this implementation promises an accelerated inference time, it should be n
 In the following figures, we compare the inference time of original 3x3 convolution (denoted as *w/o reduction*) with 3x3 convolution enhanced by preprocessing of input activations (denoted as *w/ reduction*).
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/speedup_7x7.png" | prepend: site.url }}" width="70%">
+<img src="/img/blog/kill-the-bits/speedup_7x7.png" width="70%">
 </center>
 
 *Figure 6: Comparison of 3x3 convolution with and without channel reduction for 7x7 input.*
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/speedup_14x14.png" | prepend: site.url }}" width="70%">
+<img src="/img/blog/kill-the-bits/speedup_14x14.png" width="70%">
 </center>
 
 *Figure 7: Comparison of 3x3 convolution with and without channel reduction for 14x14 input.*
 
 <center>
-<img src="{{ "/img/blog/kill-the-bits/speedup_28x28.png" | prepend: site.url }}" width="70%">
+<img src="/img/blog/kill-the-bits/speedup_28x28.png" width="70%">
 </center>
 
 *Figure 8: Comparison of 3x3 convolution with and without channel reduction for 28x28 input.*
