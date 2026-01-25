@@ -9,7 +9,7 @@
               <h3 class="post_title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
               <span class="post_date">{{ .Date.Format "January 2, 2006" }}</span>
               <p>
-                {{ with .Params.summary }}{{ . }}{{ end }}
+                {{ with .Params.summary }}{{ . | safeHTML }}{{ end }}
                 <br><a href="{{ .RelPermalink }}">Read more</a>
               </p>
             {{ end }}
