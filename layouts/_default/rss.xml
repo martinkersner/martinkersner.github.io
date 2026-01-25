@@ -1,0 +1,48 @@
+{{- $title := .Site.Title -}}
+{{- $description := .Site.Params.description -}}
+{{- $baseURL := .Site.BaseURL -}}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ $title }}</title>
+    <link>{{ $baseURL }}</link>
+    <description>{{ $description }}</description>
+    <language>{{ .Site.Language.Lang }}</language>
+    <atom:link href="{{ "index.xml" | absURL }}" rel="self" type="application/rss+xml" />
+    {{- $items := slice -}}
+
+    {{- /* Add blog posts */ -}}
+    {{- range .Site.RegularPages -}}
+      {{- $items = $items | append (dict "title" .Title "link" .Permalink "date" (.Date.Format "2006-01-02") "description" (or .Params.summary .Summary) "type" "post") -}}
+    {{- end -}}
+
+    {{- /* Add research papers */ -}}
+    {{- range .Site.Data.papers -}}
+      {{- $link := "" -}}
+      {{- if hasPrefix .arxiv "http" -}}
+        {{- $link = .arxiv -}}
+      {{- else if .arxiv -}}
+        {{- $link = printf "%s%s" $baseURL (strings.TrimPrefix "/" .arxiv) -}}
+      {{- else if .project_page -}}
+        {{- $link = .project_page -}}
+      {{- end -}}
+      {{- $desc := .abstract | plainify -}}
+      {{- if .conference -}}
+        {{- $desc = printf "%s. %s" .conference $desc -}}
+      {{- end -}}
+      {{- $dateStr := .date | time.Format "2006-01-02" -}}
+      {{- $items = $items | append (dict "title" .title "link" $link "date" $dateStr "description" $desc "type" "paper") -}}
+    {{- end -}}
+
+    {{- /* Sort all items by date descending */ -}}
+    {{- range sort $items "date" "desc" }}
+    <item>
+      <title>{{ .title }}</title>
+      <link>{{ .link }}</link>
+      <guid>{{ .link }}</guid>
+      {{- $pubDate := .date | time -}}
+      <pubDate>{{ $pubDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <description>{{ .description | htmlEscape }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>
