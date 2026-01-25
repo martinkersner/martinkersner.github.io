@@ -1,3 +1,44 @@
+- title: "DOULP: Deep Omnichain Unified Liquidity Protocol"
+  date: 2024-07-01T00:00:00Z
+  authors: Martin Kersner
+  arxiv: /doulp.pdf
+  github:
+  project_page:
+  conference:
+  abstract: >
+    The world of blockchain has transformed from a single-chain approach to an omnichain, where a set of blockchains can
+    interact together. It is vital that any omnichain participant can freely transfer assets between any pair of blockchains
+    within the omnichain in a secure and reliable manner. At the time of this writing, there are more than a dozen bridges
+    that transfer approximately $5 billion worth of assets monthly on average. However, the current evolution of bridges
+    poses significant risks to Decentralized Finance (DeFi), introduces fragmentation into the market, or creates limitations
+    in one way or another. In this paper, we propose DOULP: Deep Omnichain Unified Liquidity Protocol, which aims to create a
+    more efficient and frictionless omnichain market. Unlike other protocols, it does not rely on wrapped or intermediate tokens
+    that are susceptible to liquidity fragmentation and hacks. With DOULP, liquidity is equally accessible to all connected chains
+    without any restrictions. Moreover, the protocol allows for seamless expansion to new chains without the need for additional
+    liquidity. The protocol was purposefully designed with the users and liquidity providers in mind, prioritizing their needs and
+    convenience, but not sacrificing the security of the protocol. To ensure secure and reliable message transfer, DOULP
+    incorporates the OMP: Omnichain Messaging Protocol, which facilitates seamless omnichain communication.
+
+- title: Orakl Network
+  date: 2023-06-02T00:00:00Z
+  authors: Martin Kersner
+  arxiv: /orakl.pdf
+  github:
+  project_page:
+  conference:
+  abstract: >
+    The quantity of decentralized web3 applications is growing, accompanied by an increase in their complexity. Many
+    of these applications now require trustworthy blockchain oracles to unlock their full potential. Oracles therefore
+    became one of the most important infrastructure blocks for any blockchain ecosystem. There are famous reliable oracles
+    that secure billions of dollars, however they support only a limited set of blockchains, and rarely get challenged
+    by new oracle solutions. This leads to lack of a competition between blockchain oracles, as well as to an unequitable
+    centralized state of blockchain infrastructure that concentrates power in the hands of a few. This paper presents
+    Orakl Network, a highly customizable blockchain oracle for EVM-compatible chains. The goal of the Orakl Network is
+    to foster greater competitiveness among established blockchain oracle players. It starts by providing oracle solution
+    tailored to a Klaytn ecosystem. The Orakl Network’s solution supports both Klaytn’s mainnet and service chains. The
+    initial set of oracle services supported by Orakl Network are: Verifiable Random Function, Request-Response and Data
+    Feed.
+
 - title: >
     Temporal Knowledge Distillation for On-device Audio Classification
   date: 2021-10-27T00:00:00Z

@@ -13,7 +13,11 @@
             <span class="post_name">{{ .authors | safeHTML }}</span>
             <p>
               {{ .abstract }}
-              <br><a href="{{ .arxiv }}" target="_blank" rel="noopener">Arxiv</a>&nbsp;
+              {{ if .arxiv }}
+                <br><a href="{{ .arxiv }}" target="_blank" rel="noopener">
+                  {{- if hasPrefix .arxiv "/" -}}PDF{{- else -}}Arxiv{{- end -}}
+                </a>&nbsp;
+              {{ end }}
               {{ if .github }}<a href="{{ .github }}" target="_blank" rel="noopener">Code</a>{{ end }}
               {{ if .project_page }}<a href="{{ .project_page }}" target="_blank" rel="noopener">Project page</a>{{ end }}
             </p>
