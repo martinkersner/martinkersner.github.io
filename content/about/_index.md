@@ -17,7 +17,7 @@ title: "About"
   Lately, I have been focused on algorithmic crypto trading, specifically market making in AMMs and hybrid arbitrage systems across perpetual markets. I am currently building a system that relies on high-frequency trading and market microstructure, with a growing interest in the application of these principles to prediction markets.
 </p>
 
-<p style="margin-top: 1.5em; margin-bottom: 0;"><strong>Contacts</strong></p>
+<p style="margin-top: 1.5em; margin-bottom: 0;"><strong>Contact</strong></p>
 <p style="margin-top: 0; margin-bottom: 0;">
   <a href="https://x.com/martinkersner" target="_blank" rel="noopener">X</a><br>
   <a href="https://www.linkedin.com/in/martinkersner" target="_blank" rel="noopener">LinkedIn</a><br>
