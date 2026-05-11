@@ -63,16 +63,24 @@ a:focus {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Roboto,sans-serif;
     background-color: #fff;
 }
 
 .navbar-custom .navbar-brand {
     font-weight: 700;
+    font-size: 24px;
+    color: #EC273B;
+    letter-spacing: 0;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 30px;
 }
 
+.navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus {
     outline: 0;
+    color: #EC273B;
 }
 
 .navbar-custom .navbar-brand .navbar-toggle {
@@ -593,14 +601,8 @@ button#select-text-btn {
   margin-bottom: 0.8em;
 }
 
-img#logo {
-  padding-left: 15px;
-  height: 25px;
-  margin-top: 7px;
-}
-
 section#team, section#contact, section#service, section#main-content {
-  padding-top: 80px;
+  padding-top: 70px;
   padding-right: 30px;
   padding-left: 30px;
 }
