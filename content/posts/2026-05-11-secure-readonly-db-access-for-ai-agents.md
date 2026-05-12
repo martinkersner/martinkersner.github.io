@@ -4,13 +4,11 @@ date: 2026-05-11T00:00:00Z
 slug: "secure-readonly-db-access-for-ai-agents"
 disqus_identifier: 2026-05-11
 author: martin
-summary: "Cursor running Claude Opus 4.6 <a href='https://x.com/lifeof_jer/status/2048103471019434248' target='_blank'>wiped a production database</a> in 9 seconds. Here's how to give an agent Postgres access without that risk. Three steps: a read-only role, credentials in a service file, and an allowlist that pins the connection target.<br><br>The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs."
+summary: "Cursor running Claude Opus 4.6 <a href='https://x.com/lifeof_jer/status/2048103471019434248' target='_blank'>wiped a production database</a> in 9 seconds. I keep Claude on a read-only Postgres role, with the password in a service file and an allowlist that pins the connection target. The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs."
 comments: true
 ---
 
-Cursor running Claude Opus 4.6 <a href="https://x.com/lifeof_jer/status/2048103471019434248" target="_blank">wiped a production database</a> in 9 seconds. Here's how to give an agent Postgres access without that risk. Three steps: a read-only role, credentials in a service file, and an allowlist that pins the connection target.
-
-The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs.
+Cursor running Claude Opus 4.6 <a href="https://x.com/lifeof_jer/status/2048103471019434248" target="_blank">wiped a production database</a> in 9 seconds. I keep Claude on a read-only Postgres role, with the password in a service file and an allowlist that pins the connection target. The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs.
 
 ## 1. Create a read-only role
 
