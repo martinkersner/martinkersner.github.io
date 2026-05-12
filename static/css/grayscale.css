@@ -673,6 +673,12 @@ section#main-content div#post p {
   margin-bottom: 1.5em;
 }
 
+section#main-content div#post pre,
+section#main-content div#post div.highlight {
+  margin-top: -0.75em;
+  margin-bottom: 1.5em;
+}
+
 /* date name */
 section#main-content div#post span#date,
 section#main-content div#post span#name,
