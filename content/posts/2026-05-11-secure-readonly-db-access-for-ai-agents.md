@@ -66,4 +66,4 @@ In `.claude/settings.json`:
 }
 ```
 
-`service=mydb` pins host, port, db, user, and `sslmode` via the conf file, so the allowlist locks the whole connection target, not just the binary name.
+Without `service=mydb`, the allowlist would let Claude run `psql` against anything.
