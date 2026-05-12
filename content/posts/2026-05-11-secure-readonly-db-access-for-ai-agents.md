@@ -4,15 +4,13 @@ date: 2026-05-11T00:00:00Z
 slug: "secure-readonly-db-access-for-ai-agents"
 disqus_identifier: 2026-05-11
 author: martin
-summary: "AI agents are useful, but giving them unrestricted database access has real consequences. Cursor running Claude Opus 4.6 <a href='https://x.com/lifeof_jer/status/2048103471019434248' target='_blank'>recently wiped a production database in 9 seconds</a>. A bit of setup at the DB side prevents that. Below is a minimal recipe for PostgreSQL: a <code>SELECT</code>-only role with statement timeout and audit logging, <code>.pgpass</code> + <code>.pg_service.conf</code> so the password stays out of argv, and a Claude Code allowlist that pins the connection target. The same pattern maps to MySQL, MongoDB, BigQuery, and most other databases."
+summary: "Cursor running Claude Opus 4.6 <a href='https://x.com/lifeof_jer/status/2048103471019434248' target='_blank'>wiped a production database</a> in 9 seconds. Here's how to give an agent Postgres access without that risk. Three steps: a read-only role, credentials in a service file, and an allowlist that pins the connection target.<br><br>The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs."
 comments: true
 ---
 
-Agentic engineering tools are useful, but unrestricted access has real consequences. Cursor running Claude Opus 4.6 <a href="https://x.com/lifeof_jer/status/2048103471019434248" target="_blank">recently wiped a production database in 9 seconds</a>. A bit of setup prevents that.
+Cursor running Claude Opus 4.6 <a href="https://x.com/lifeof_jer/status/2048103471019434248" target="_blank">wiped a production database</a> in 9 seconds. Here's how to give an agent Postgres access without that risk. Three steps: a read-only role, credentials in a service file, and an allowlist that pins the connection target.
 
-My use case is querying trading and market data (public numbers, no user records), so the blast radius I care about is destructive writes and runaway queries, not what ends up in the agent's transcript. If your schema holds PII or secrets, note that read-only ≠ private: whatever the agent reads can land in conversation logs. In that case, `GRANT SELECT` per-table rather than `ON ALL TABLES`.
-
-Recipe below is for PostgreSQL. The same pattern (dedicated role, `SELECT`-only, statement timeout, narrow client allowlist) maps to MySQL, MongoDB, BigQuery, and most other databases.
+The risk I care about, for trading and market data (public numbers, no user records), is destructive writes and runaway queries. Read-only access does not block leakage. If your schema holds PII or secrets, remember that anything the agent reads can end up in conversation logs.
 
 ## 1. Create a read-only role
 
@@ -71,11 +69,3 @@ In `.claude/settings.json`:
 ```
 
 `service=mydb` pins host, port, db, user, and `sslmode` via the conf file, so the allowlist locks the whole connection target, not just the binary name.
-
-## What about the MCP server?
-
-Anthropic ships a reference Postgres MCP server that's read-only by design. The difference vs. this recipe is where the boundary lives: the MCP server enforces read-only in application code, while a role-based setup enforces it at the DB itself, the hardest possible boundary. The two compose well. Run the MCP server *with* the read-only role from this post and you get two locks instead of one: even if the server has a bug that exposes a write path, the DB still refuses.
-
-## Wrap-up
-
-I've been running this against my own Postgres for a few weeks. Claude has executed plenty of `SELECT`s through it, no surprises.
