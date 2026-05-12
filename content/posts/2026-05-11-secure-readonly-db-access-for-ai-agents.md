@@ -24,11 +24,11 @@ ALTER ROLE claude SET log_statement = 'all'; -- audit trail goes to the Postgres
 ALTER ROLE claude SET temp_file_limit = '1GB'; -- cap disk spill from sort/hash queries
 ```
 
-No `INSERT`, `UPDATE`, `DELETE`, `DROP`. Statement timeout kills runaway queries, though it's a `USERSET` parameter, so the agent can override it in-session; for hard enforcement, put a connection pooler in front or point the role at a read replica. `default_transaction_read_only` is a second layer: if a future `GRANT` accidentally adds write access, transactions still start in read-only mode.
+No `INSERT`, `UPDATE`, `DELETE`, `DROP`. Statement timeout kills runaway queries, though it's a `USERSET` parameter, so the agent can override it in-session; for hard enforcement, put a connection pooler in front or point the role at a read replica.
 
 ## 2. Give Claude the connection details
 
-Keep the password out of argv (and out of shell history, `ps`, and tool logs). Two files do the work. Replace `db.example.com` with the actual address (LAN IP, Tailscale IP, or hostname) of your Postgres server.
+Keep the password out of argv (and out of shell history, `ps`, and tool logs). Two files do the work. Replace `db.example.com` with the actual address of your Postgres server.
 
 Put the password in `~/.pgpass` and `chmod 600` the file:
 
