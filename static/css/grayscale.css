@@ -70,7 +70,7 @@ a:focus {
     font-weight: 500;
     font-size: 28px;
     color: #EC273B;
-    letter-spacing: 0;
+    letter-spacing: normal;
     padding-top: 13px;
     padding-bottom: 13px;
     padding-left: 30px;
