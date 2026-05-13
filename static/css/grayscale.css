@@ -275,7 +275,6 @@ a:focus {
 
 .btn {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
@@ -324,7 +323,6 @@ ul.banner-social-buttons li {
 
 footer {
     padding: 10px 0;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 footer p {
@@ -360,7 +358,6 @@ span#heart {
 }
 
 .text-muted {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 1em;
     color: #777;
 }
@@ -401,7 +398,6 @@ section#contact .form-group {
 
 section#contact .form-group input,
 section#contact .form-group textarea {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     padding: 10px;
 }
 
@@ -417,7 +413,6 @@ section#contact .form-group textarea.form-control {
 
 section#contact .text-danger {
     color: #e74c3c;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 1em;
     text-align: left;
 }
@@ -426,7 +421,6 @@ section#contact .text-danger {
     padding: 10px 20px;
     border-radius: 2px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 18px;
     font-weight: 500;
     color: #fff;
@@ -506,7 +500,6 @@ fieldset[disabled] .btn-xl.active {
 #product p {
   margin-left: 1em;
   margin-right: 1em;
-  font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 300;
   text-align: justify;
   text-justify: inter-word;
@@ -517,10 +510,6 @@ fieldset[disabled] .btn-xl.active {
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 0.5em;
-}
-
-div.alert {
-  font-family: 'Open Sans';
 }
 
 i.fa-reply {
@@ -591,7 +580,6 @@ span.arrow {
 span.subsection-title {
   color: #fff;
   display: block;
-  font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700;
 }
 
