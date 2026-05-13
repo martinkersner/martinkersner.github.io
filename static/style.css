@@ -14,3 +14,12 @@
 section#main-content .paper-links {
     margin-top: 0.6em;
 }
+
+/* Allow oversized MathJax display equations to scroll within their block
+   instead of pushing the page wider on narrow viewports. */
+.MathJax_Display,
+mjx-container[display="true"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}

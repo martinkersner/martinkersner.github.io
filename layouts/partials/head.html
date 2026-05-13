@@ -7,7 +7,7 @@
     {{ .Title }} | {{ .Site.Title }}
   {{- end -}}
 </title>
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS Feed" href="{{ "index.xml" | absURL }}">
