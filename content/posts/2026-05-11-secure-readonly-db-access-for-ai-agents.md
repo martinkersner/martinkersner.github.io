@@ -17,6 +17,8 @@ CREATE ROLE claude WITH LOGIN PASSWORD 'mypassword';
 GRANT CONNECT ON DATABASE mydb TO claude;
 GRANT USAGE ON SCHEMA myschema TO claude;
 GRANT SELECT ON ALL TABLES IN SCHEMA myschema TO claude;
+ALTER DEFAULT PRIVILEGES FOR ROLE owner IN SCHEMA myschema
+  GRANT SELECT ON TABLES TO claude; -- cover tables created later
 REVOKE CREATE ON SCHEMA public FROM claude; -- PG ≤14 grants this by default via PUBLIC
 ALTER ROLE claude SET statement_timeout = '15s'; -- starting value only; the session can SET it back to 0
 ALTER ROLE claude SET default_transaction_read_only = true;
@@ -25,6 +27,8 @@ ALTER ROLE claude SET temp_file_limit = '1GB'; -- cap disk spill from sort/hash 
 ```
 
 No `INSERT`, `UPDATE`, `DELETE`, `DROP`. Statement timeout kills runaway queries, though it's a `USERSET` parameter, so the agent can override it in-session; for hard enforcement, put a connection pooler in front or point the role at a read replica.
+
+`GRANT SELECT ON ALL TABLES` only covers tables that exist at grant time. `ALTER DEFAULT PRIVILEGES` is the standing rule that applies to anything `owner` creates later, so you don't have to re-grant on every new table. Replace `owner` with whichever role actually creates tables in the schema. If multiple roles create tables, repeat the `ALTER DEFAULT PRIVILEGES` line for each.
 
 ## 2. Give Claude the connection details
 
