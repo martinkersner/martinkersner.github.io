@@ -4,17 +4,17 @@ date: 2026-05-12T00:00:00Z
 slug: "closing-logs-to-issues-loop-with-ai-agents"
 disqus_identifier: 2026-05-12
 author: martin
-summary: "Generating code is the easy part of agentic engineering. The harder goal is letting the agent manage the whole development cycle, including watching how a change behaves in production once it ships. The missing link is usually feedback: logs sit on the machines the service runs on, and the agent shouldn't need a login to those machines to read them. The setup below pushes logs into Grafana Cloud Loki, then gives the agent a read-only token plus <code>logcli</code>. Every N minutes the agent queries Loki for errors and opens (or comments on) GitHub issues against the repo. The agent never has to touch a VM, and there's no extra infrastructure to babysit."
+summary: "After 5 months of building with agents, coding has become the easy part. The harder part is letting agents run the full cycle, including reacting to what happens in production. The piece that's usually missing is a path from production back to the codebase the agent is editing. New features and changes to the code can lead to unexpected behavior or bugs that should be fixed fast. The setup below pushes logs into Grafana Cloud Loki, then gives the agent a read-only token plus <code>logcli</code>. Every N minutes the agent queries Loki for errors and opens (or comments on) GitHub issues against the repo. Both Loki and GitHub are managed services, so there's nothing on my side to keep running."
 comments: true
 ---
 
-Generating code is the easy part of agentic engineering. The harder goal is letting the agent manage the whole development cycle, including watching how a change behaves in production once it ships. The missing link is usually feedback: logs sit on the machines the service runs on, and the agent shouldn't need a login to those machines to read them.
+After 5 months of building with agents, coding has become the easy part. The harder part is letting agents run the full cycle, including reacting to what happens in production. The piece that's usually missing is a path from production back to the codebase the agent is editing. New features and changes to the code can lead to unexpected behavior or bugs that should be fixed fast.
 
-The setup below pushes logs into Grafana Cloud Loki, then gives the agent a read-only token plus `logcli`. Every N minutes the agent queries Loki for errors and opens (or comments on) GitHub issues against the repo. The agent never has to touch a VM, and there's no extra infrastructure to babysit.
+The setup below pushes logs into Grafana Cloud Loki, then gives the agent a read-only token plus `logcli`. Every N minutes the agent queries Loki for errors and opens (or comments on) GitHub issues against the repo. Both Loki and GitHub are managed services, so there's nothing on my side to keep running.
 
 ## Grafana Cloud
 
-[Grafana Cloud](https://grafana.com/) has a free tier that fits this use case: 50 GB of log ingestion per month, 14 days of retention, no credit card required. Sign up at Grafana, create Loki stack, and note the Loki endpoint (something like `https://logs-prod-us-central1.grafana.net`) plus the user ID.
+[Grafana Cloud](https://grafana.com/)'s free tier covers 50 GB/month and 14 days of retention, which is more than enough for experimenting with this setup. Sign up at Grafana, create Loki stack, and note the Loki endpoint (something like `https://logs-prod-us-central1.grafana.net`) plus the user ID.
 
 ## Install logcli
 
@@ -34,7 +34,7 @@ mv ./cmd/logcli/logcli /usr/local/bin/logcli
 
 ## Install GitHub CLI
 
-[GitHub CLI](https://cli.github.com/) handles the issue side. Install it:
+The agent uses [GitHub CLI](https://cli.github.com/) to file and comment on issues. Install it:
 
 ```bash
 brew install gh    # macOS
@@ -51,7 +51,7 @@ The token lives in the keychain after that.
 
 ## Wire it into Claude Code
 
-In Grafana Cloud, create an Access Policy scoped to `logs:read` only (no `logs:write`, no admin), then generate a token under that policy. That token is the agent's entire permission surface for Loki.
+In Grafana Cloud, create an Access Policy scoped to `logs:read` only (no `logs:write`, no admin), then generate a token under that policy. That token is the agent's only Loki credential.
 
 Put the connection details and the allowlist in `.claude/settings.local.json` (per-project, gitignored by default, so the token stays out of git):
 
@@ -76,7 +76,7 @@ Put the connection details and the allowlist in `.claude/settings.local.json` (p
 }
 ```
 
-The agent's bash sessions inherit the env vars, so `logcli` connects without anything on the command line. Read-only access is enforced on two layers. The allowlist limits the agent to query commands, and the token itself has no write scope.
+The agent's bash sessions inherit the env vars, so `logcli` connects without anything on the command line. The token is read-only, and the allowlist blocks any non-query `logcli` command.
 
 ## Useful queries
 
@@ -134,8 +134,4 @@ From a Claude Code session in the repo:
 /loop 30m /scan-logs
 ```
 
-Every 30 minutes the agent pulls logs, dedupes them against open issues, and either files something new or comments on what's already tracked. Stop with `/loop stop`.
-
-## Wrap-up
-
-The whole thing is `logcli`, a read-only Loki token, `gh`, and a 20-line prompt. The agent never touches a VM and the only credentials it ever sees are the two read-only tokens you scoped for it.
+Now every 30 minutes I get either a new issue or a comment on an existing one for whatever blew up. You can stop the loop using `/loop stop`.
