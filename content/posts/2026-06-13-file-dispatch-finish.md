@@ -9,7 +9,6 @@ comments: true
 ---
 
 My approach to coding after graduating from university has not changed much up until early 2024, when I seriously started integrating AI in my daily workflows, but it seems that the most significant changes are still yet to come.
-The way we build software is being reshaped and I think we have not settled on any concrete approach yet, and who knows we might just end up with many more different approaches than we have known until now.
 At first, when experimenting with Github Copilot, I used it only for basic autocomplete of code in the closest scope.
 Then in 2025, I moved to Cursor which offered much better autocomplete capabilities. It worked throughout the whole file and multiple files as well.
 I could move faster and with very surgical precision.
@@ -19,10 +18,6 @@ All this time, the approaches of software engineers were more or less the same, 
 
 It all changed when Claude Opus started showing promising results in late 2025.
 Suddenly, the previously awkward chat interface became the way we express our needs and requirements when building systems.
-It might seem that chat interfaces had already been well known at that point, because everybody had experience with them in any of the freely available AI chats.
-However, unlike small-scope tab completion, or chat regarding specific small parts of code, the chat interface connected with very capable AI has changed the game.
-Suddenly, anybody with access to AI was able to build cool-looking demos, pretend to work while off-loading everything mindlessly on AI without any understanding, and accept all the work without review scrutiny.
-Developers became divided on whether the AI is good enough to take their jobs, while the AI models kept improving and breaking new records.
 Now, the AI is not just a chat interface, it is markdown documents describing how to behave, skills that can be readily loaded, memories of past conversations and many others.
 The software development work has become more about how to control the AI in order to get what you want, yet I still see people not taking advantage of it, and producing subpar work.
 It takes a lot of energy to stay up to date with new developments and approaches, but most importantly, there is now a nearly infinite number of ways to do the same thing.
