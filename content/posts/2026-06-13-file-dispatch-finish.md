@@ -32,6 +32,7 @@ It shouldn't require me to build complex pipelines, install new software, or int
 The only requirements are GitHub (issues, PR, CI/CD), because I already have all the code there, and Claude (coding, orchestration, memory), because that is my current AI of choice, but any other AI would work the same way.
 The approach is defined as an abstract pipeline with three distinct consecutive steps: 1) File, 2) Dispatch and 3) Finish.
 The pipeline has to be executed in order, but there can be an unlimited number of pipelines running at the same time.
+The steps can be triggered by different actors from different places.
 
 ## File
 
