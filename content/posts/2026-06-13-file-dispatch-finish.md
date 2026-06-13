@@ -4,12 +4,12 @@ date: 2026-06-13T00:00:00Z
 slug: "file-dispatch-finish"
 disqus_identifier: 2026-06-13
 author: martin
-summary: ""
+summary: "My approach to coding after graduating from university has not changed much up until early 2024, when I seriously started integrating AI in my daily workflows, but it seems that the most significant changes are still yet to come. At first, when experimenting with GitHub Copilot, I used it only for basic autocomplete of code in the closest scope. Then in 2025, I moved to Cursor which offered much better autocomplete capabilities. It worked throughout the whole file and multiple files as well. I could move faster and with very surgical precision. I tried to use the chat interface as well, but its capabilities were quite limited. It was useful mainly for debugging of known problematic parts of code, or for writing small-scope functions, and the experience was basically on-par with just using the free version of ChatGPT. All this time, the approaches of software engineers were more or less the same, because the tools were designed with a very specific use in mind."
 comments: true
 ---
 
 My approach to coding after graduating from university has not changed much up until early 2024, when I seriously started integrating AI in my daily workflows, but it seems that the most significant changes are still yet to come.
-At first, when experimenting with Github Copilot, I used it only for basic autocomplete of code in the closest scope.
+At first, when experimenting with GitHub Copilot, I used it only for basic autocomplete of code in the closest scope.
 Then in 2025, I moved to Cursor which offered much better autocomplete capabilities. It worked throughout the whole file and multiple files as well.
 I could move faster and with very surgical precision.
 I tried to use the chat interface as well, but its capabilities were quite limited.
@@ -28,6 +28,8 @@ The only requirements are GitHub (issues, PR, CI/CD), because I already have all
 The approach is defined as an abstract pipeline with three distinct consecutive steps: 1) File, 2) Dispatch and 3) Finish.
 The pipeline has to be executed in order, but there can be an unlimited number of pipelines running at the same time.
 The steps can be triggered by different actors from different places.
+
+<img src="/img/blog/file-dispatch-finish/pipeline.svg" width="100%">
 
 ## File
 
@@ -80,7 +82,7 @@ I have been using this system across multiple projects for more than two months,
 It allows me to work on many things at the same time, and even on multiple repositories without having too hard a time with context switching.
 I am very happy with having the issue to PR trail because it contains all the information that can get me, the AI, or other collaborators up to speed.
 There is, however, one thing that is a little bit bothersome and that is the dependency on the issue ID.
-It does not matter much in the first and second step, but at the third step I am looking at PR which has its own ID, and I have to make sure I find the right issue ID for the specific PR.
+It does not matter much in the first and second step, but at the third step I am looking at a PR which has its own ID, and I have to make sure I find the right issue ID for the specific PR.
 The easiest solution for this would be to include the issue ID in the name of the PR.
 Another thing that made this approach a bit painful was GitHub itself.
 I have an open terminal window with Claude Code and another window with the GitHub website.
