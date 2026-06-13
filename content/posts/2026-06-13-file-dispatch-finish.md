@@ -90,3 +90,7 @@ The easiest solution for this would be to include the issue ID in the name of th
 Another thing that made this approach a bit painful was GitHub itself.
 I have an open terminal window with Claude Code and another window with the GitHub website.
 The GitHub website is very slow, so after verifying for some time that this is actually the process I want to follow, I found GitHub TUI tools to keep everything in one place and, importantly, fast.
+
+The way we build software is still being figured out, and this pipeline is just the shape that works for me right now.
+What I am fairly sure about is the direction: less manual coding, less micromanagement of the agent, and more time spent deciding what should be built rather than typing it out.
+File, dispatch, finish is simple enough that I can keep using it while everything around it keeps changing, and simple enough that you can take it and bend it to your own stack.
