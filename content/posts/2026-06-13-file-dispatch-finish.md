@@ -11,7 +11,7 @@ comments: true
 My approach to coding after graduating from university has not changed much up until early 2024, when I seriously started integrating AI in my daily workflows, but it seems that the most significant changes are still yet to come.
 The way we build software is being reshaped and I think we have not settled on any concrete approach yet, and who knows we might just end up with many more different approaches than we have known until now.
 At first, when experimenting with Github Copilot, I used it only for basic autocomplete of code in the closest scope.
-Then in 2025, I moved to Cursor which offered much better autocomplete capabilities; it worked throughout the whole file and multiple files as well.
+Then in 2025, I moved to Cursor which offered much better autocomplete capabilities. It worked throughout the whole file and multiple files as well.
 I could move faster and with very surgical precision.
 I tried to use the chat interface as well, but its capabilities were quite limited.
 It was useful mainly for debugging of known problematic parts of code, or for writing small-scope functions, and the experience was basically on-par with just using the free version of ChatGPT.
@@ -63,7 +63,7 @@ The agent then starts working on the issue following the dispatch issue skill (p
 7. Notify about completion
 
 The review agent finds at least one issue in most of the PRs that the original agent created, unless the PR is very small.
-The limit of five review rounds was set just as a guess; it has never gone over four rounds of reviews.
+The limit of five review rounds was set just as a guess. It has never gone over four rounds of reviews.
 
 
 ## Finish
