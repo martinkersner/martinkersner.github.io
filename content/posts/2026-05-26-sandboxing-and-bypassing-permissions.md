@@ -18,7 +18,7 @@ A couple weeks later, I stopped coding manually and stopped using git and GitHub
 
 `--dangerously-skip-permissions` allows Claude to execute tasks, run shell commands, and modify files without constantly prompting you for approval. Simply put, everything is allowed, and by everything I mean everything. It solves approval fatigue and lets agents scale, but with a significant drawback: what if it does something you would never do like `rm -rf /`? I am going to discuss the protection mechanism in the Sandbox section.
 
-You can launch Claude Code with `--dangerously-skip-permissions`, or you can specify the config in `settings.json`.
+You can launch Claude Code with `--dangerously-skip-permissions`, and to supress the safety confirmation prompt you can add the following property in `settings.json`.
 
 ```json
 {
