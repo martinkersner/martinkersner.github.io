@@ -16,7 +16,7 @@
     {{- end -}}
 
     {{- /* Add research papers */ -}}
-    {{- range .Site.Data.papers -}}
+    {{- range hugo.Data.papers -}}
       {{- $link := "" -}}
       {{- if hasPrefix .arxiv "http" -}}
         {{- $link = .arxiv -}}
