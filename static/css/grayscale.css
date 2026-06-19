@@ -685,7 +685,8 @@ section#main-content div#post span#name, span.post_name {
   font-size: 1em;
 }
 
-ol > li {
+ol > li,
+ul > li {
     font-size: 1.1em;
     line-height: 1.8em;
 }
