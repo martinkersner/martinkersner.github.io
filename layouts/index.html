@@ -6,11 +6,15 @@
         {{ range $posts.GroupByDate "2006 Jan" }}
           <div>
             {{ range .Pages }}
-              <h3 class="post_title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              {{ $link := .RelPermalink }}
+              {{ $ext := "" }}
+              {{ with .Params.external_url }}{{ $link = . }}{{ $ext = "target=\"_blank\" rel=\"noopener\"" }}{{ end }}
+              <h3 class="post_title"><a href="{{ $link }}" {{ $ext | safeHTMLAttr }}>{{ .Title }}</a></h3>
               <span class="post_date">{{ .Date.Format "January 2, 2006" }}</span>
+              {{ with .Params.authors }}<span class="post_name">{{ . | safeHTML }}</span>{{ end }}
               <p>
                 {{ with .Params.summary }}{{ . | safeHTML }}{{ end }}
-                <br><a href="{{ .RelPermalink }}">Read more</a>
+                <br><a href="{{ $link }}" {{ $ext | safeHTMLAttr }}>Read more</a>
               </p>
             {{ end }}
           </div>
